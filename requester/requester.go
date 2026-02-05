@@ -20,7 +20,7 @@ const workerCount int64 = 10
 const sequenceCount int64 = 500
 
 const requestJitterRandNVal = 11 // also in time.Millisecond
-const requestJitterMin = 10 * time.Millisecond
+const requestJitterMin = 100 * time.Millisecond
 
 const targetIdHubUrl = "http://localhost:20100/api/identity"
 const targetDidUrl = "http://localhost:20000"
@@ -149,7 +149,7 @@ func (requester *Requester) RunSingle(workerId int64, runId int64) *RequesterRun
 	err := requester.CheckDidVerificationMethods(&reqRun)
 
 	if err == nil {
-		if rand.Intn(100) > 95 {
+		if rand.Intn(100) > 98 {
 			// also log some good runs
 			requester.WriteRunToFile(&reqRun, "ok", logger)
 		}
@@ -267,14 +267,16 @@ func (requester *Requester) CheckDidVerificationMethods(run *RequesterRun) error
 }
 
 func (requester *Requester) WriteRunToFile(run *RequesterRun, suffix string, logger *slog.Logger) {
-	logFileName := "logs/" + time.Now().Format(time.RFC3339) + "_" + run.Did + "_" + suffix + ".json"
+	if len(suffix) == 0 {
+		logger.Warn("empty suffix not allowed for logs")
+		return
+	}
 
-	if _, err := os.Stat("logs"); os.IsNotExist(err) {
-		err := os.Mkdir("logs", 0666)
-		if err != nil {
-			logger.Warn("failed to create logs folder", "error", err)
-			return
-		}
+	logFileName := "logs/" + suffix + "/" + time.Now().Format(time.RFC3339) + "_" + run.Did + "_" + suffix + ".json"
+
+	if err := os.MkdirAll("logs/"+suffix, 0777); err != nil {
+		logger.Warn("failed to create suffix logs folder", "error", err)
+		return
 	}
 
 	fileContent, err := json.Marshal(run)
