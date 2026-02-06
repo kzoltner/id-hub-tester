@@ -1,0 +1,66 @@
+{
+  "Did": "did:web:consumer-idhub:test-id-3348",
+  "ParticipantRequest": {
+    "active": true,
+    "participantContextId": "did:web:consumer-idhub:test-id-3348",
+    "did": "did:web:consumer-idhub:test-id-3348",
+    "key": {
+      "keyId": "did:web:consumer-idhub:test-id-3348#test-key",
+      "privateKeyAlias": "did:web:consumer-idhub:test-id-3348-test-key-alias",
+      "keyGeneratorParams": {
+        "algorithm": "EdDSA",
+        "curve": "Ed25519"
+      }
+    }
+  },
+  "ParticipantRequestResponse": {
+    "apiKey": "ZGlkOndlYjpjb25zdW1lci1pZGh1Yjp0ZXN0LWlkLTMzNDg=.w7s2MQVyM1jHkI904RpqGEJaE0+p8NVd44RBHf8Y/ldZOfC/7wirm/9JhfXyg225VnSzCP1dydj3eRW+l/9w4w==",
+    "clientId": "did:web:consumer-idhub:test-id-3348",
+    "clientSecret": "IB30ySIf4yaU1afb"
+  },
+  "ParticipantRequestFailed": false,
+  "DidDocumentResponse": {
+    "@context": [
+      "https://www.w3.org/ns/did/v1"
+    ],
+    "authentication": [],
+    "id": "did:web:consumer-idhub:test-id-3348",
+    "service": [],
+    "verificationMethod": [
+      {
+        "controller": "did:web:consumer-idhub:test-id-3348",
+        "id": "did:web:consumer-idhub:test-id-3348#test-key",
+        "publicKeyJwk": {
+          "crv": "Ed25519",
+          "kty": "OKP",
+          "x": "J6XYblAMgcWIaNplpxtid6sQIZCJGRgUP-Xv2jvPN5E"
+        },
+        "publicKeyMultibase": null,
+        "type": "JsonWebKey2020"
+      }
+    ]
+  },
+  "DidDocumentFailed": false,
+  "KeyPairResponse": [
+    {
+      "defaultPair": true,
+      "groupName": null,
+      "id": "90a2ad3d-f01c-4958-ba81-44fab7ae1e34",
+      "keyContext": "JsonWebKey2020",
+      "keyId": "did:web:consumer-idhub:test-id-3348#test-key",
+      "participantContextId": "did:web:consumer-idhub:test-id-3348",
+      "privateKeyAlias": "did:web:consumer-idhub:test-id-3348-test-key-alias",
+      "rotationDuration": 0,
+      "serializedPublicKey": "{\"kty\":\"OKP\",\"crv\":\"Ed25519\",\"kid\":\"did:web:consumer-idhub:test-id-3348#test-key\",\"x\":\"J6XYblAMgcWIaNplpxtid6sQIZCJGRgUP-Xv2jvPN5E\"}",
+      "state": 200,
+      "timestamp": 1770381814549,
+      "usage": [
+        "sign_credentials",
+        "sign_token",
+        "sign_presentation"
+      ],
+      "useDuration": 15552000000
+    }
+  ],
+  "KeyPairResponseFailed": false
+}

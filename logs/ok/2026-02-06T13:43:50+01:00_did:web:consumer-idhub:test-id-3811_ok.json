@@ -1,0 +1,66 @@
+{
+  "Did": "did:web:consumer-idhub:test-id-3811",
+  "ParticipantRequest": {
+    "active": true,
+    "participantContextId": "did:web:consumer-idhub:test-id-3811",
+    "did": "did:web:consumer-idhub:test-id-3811",
+    "key": {
+      "keyId": "did:web:consumer-idhub:test-id-3811#test-key",
+      "privateKeyAlias": "did:web:consumer-idhub:test-id-3811-test-key-alias",
+      "keyGeneratorParams": {
+        "algorithm": "EdDSA",
+        "curve": "Ed25519"
+      }
+    }
+  },
+  "ParticipantRequestResponse": {
+    "apiKey": "ZGlkOndlYjpjb25zdW1lci1pZGh1Yjp0ZXN0LWlkLTM4MTE=.Simsco8Q5VOhemSYMn7PEtO0FZa4C6aqUOsNBHk3NWk2I4LMGdLysTLpKDyrk6SZB9k44kCWi3vwifEdbQcQcQ==",
+    "clientId": "did:web:consumer-idhub:test-id-3811",
+    "clientSecret": "bA4Vk8XVccC4KMz0"
+  },
+  "ParticipantRequestFailed": false,
+  "DidDocumentResponse": {
+    "@context": [
+      "https://www.w3.org/ns/did/v1"
+    ],
+    "authentication": [],
+    "id": "did:web:consumer-idhub:test-id-3811",
+    "service": [],
+    "verificationMethod": [
+      {
+        "controller": "did:web:consumer-idhub:test-id-3811",
+        "id": "did:web:consumer-idhub:test-id-3811#test-key",
+        "publicKeyJwk": {
+          "crv": "Ed25519",
+          "kty": "OKP",
+          "x": "XiDAqxu_ZparRI6SDlqoYzW234Q75lSxu1ApIuK-08w"
+        },
+        "publicKeyMultibase": null,
+        "type": "JsonWebKey2020"
+      }
+    ]
+  },
+  "DidDocumentFailed": false,
+  "KeyPairResponse": [
+    {
+      "defaultPair": true,
+      "groupName": null,
+      "id": "b965661e-602a-4e0e-be91-9caabb48d187",
+      "keyContext": "JsonWebKey2020",
+      "keyId": "did:web:consumer-idhub:test-id-3811#test-key",
+      "participantContextId": "did:web:consumer-idhub:test-id-3811",
+      "privateKeyAlias": "did:web:consumer-idhub:test-id-3811-test-key-alias",
+      "rotationDuration": 0,
+      "serializedPublicKey": "{\"kty\":\"OKP\",\"crv\":\"Ed25519\",\"kid\":\"did:web:consumer-idhub:test-id-3811#test-key\",\"x\":\"XiDAqxu_ZparRI6SDlqoYzW234Q75lSxu1ApIuK-08w\"}",
+      "state": 200,
+      "timestamp": 1770381829821,
+      "usage": [
+        "sign_credentials",
+        "sign_token",
+        "sign_presentation"
+      ],
+      "useDuration": 15552000000
+    }
+  ],
+  "KeyPairResponseFailed": false
+}

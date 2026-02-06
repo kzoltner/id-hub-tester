@@ -1,0 +1,66 @@
+{
+  "Did": "did:web:consumer-idhub:test-id-677",
+  "ParticipantRequest": {
+    "active": true,
+    "participantContextId": "did:web:consumer-idhub:test-id-677",
+    "did": "did:web:consumer-idhub:test-id-677",
+    "key": {
+      "keyId": "did:web:consumer-idhub:test-id-677#test-key",
+      "privateKeyAlias": "did:web:consumer-idhub:test-id-677-test-key-alias",
+      "keyGeneratorParams": {
+        "algorithm": "EdDSA",
+        "curve": "Ed25519"
+      }
+    }
+  },
+  "ParticipantRequestResponse": {
+    "apiKey": "ZGlkOndlYjpjb25zdW1lci1pZGh1Yjp0ZXN0LWlkLTY3Nw==.4iopO9y0QDX1uzvGJAJzvAppWTnpR2Ai4DY2cGWCCd0FJ7qfH/v3XZ7M2TwI/bST2x1NCtk8tlD63lsn1HEuuw==",
+    "clientId": "did:web:consumer-idhub:test-id-677",
+    "clientSecret": "5kEAZ22K86bGIvH8"
+  },
+  "ParticipantRequestFailed": false,
+  "DidDocumentResponse": {
+    "@context": [
+      "https://www.w3.org/ns/did/v1"
+    ],
+    "authentication": [],
+    "id": "did:web:consumer-idhub:test-id-677",
+    "service": [],
+    "verificationMethod": [
+      {
+        "controller": "did:web:consumer-idhub:test-id-677",
+        "id": "did:web:consumer-idhub:test-id-677#test-key",
+        "publicKeyJwk": {
+          "crv": "Ed25519",
+          "kty": "OKP",
+          "x": "JCY8T3Bi18zWjCe04rpyY9LVMt_JpVLktc1ZVfGfRvA"
+        },
+        "publicKeyMultibase": null,
+        "type": "JsonWebKey2020"
+      }
+    ]
+  },
+  "DidDocumentFailed": false,
+  "KeyPairResponse": [
+    {
+      "defaultPair": true,
+      "groupName": null,
+      "id": "e2ee0f54-ab26-48c6-801e-339b5bd31f7d",
+      "keyContext": "JsonWebKey2020",
+      "keyId": "did:web:consumer-idhub:test-id-677#test-key",
+      "participantContextId": "did:web:consumer-idhub:test-id-677",
+      "privateKeyAlias": "did:web:consumer-idhub:test-id-677-test-key-alias",
+      "rotationDuration": 0,
+      "serializedPublicKey": "{\"kty\":\"OKP\",\"crv\":\"Ed25519\",\"kid\":\"did:web:consumer-idhub:test-id-677#test-key\",\"x\":\"JCY8T3Bi18zWjCe04rpyY9LVMt_JpVLktc1ZVfGfRvA\"}",
+      "state": 200,
+      "timestamp": 1770381727420,
+      "usage": [
+        "sign_credentials",
+        "sign_token",
+        "sign_presentation"
+      ],
+      "useDuration": 15552000000
+    }
+  ],
+  "KeyPairResponseFailed": false
+}
