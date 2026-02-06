@@ -2,6 +2,7 @@ package requester
 
 import (
 	"bytes"
+	"encoding/base64"
 	"encoding/json"
 	"fmt"
 	"io"
@@ -35,13 +36,13 @@ type Requester struct {
 type RequesterRun struct {
 	Did                        string
 	ParticipantRequest         ParticipantRequest
-	ParticipantRequestResponse string
+	ParticipantRequestResponse any
 	ParticipantRequestFailed   bool
 
-	DidDocumentResponse string
+	DidDocumentResponse any
 	DidDocumentFailed   bool
 
-	KeyPairResponse       string
+	KeyPairResponse       any
 	KeyPairResponseFailed bool
 }
 
@@ -151,6 +152,10 @@ func (requester *Requester) RunSingle(workerId int64, runId int64) *RequesterRun
 	if err == nil {
 		if rand.Intn(100) > 98 {
 			// also log some good runs
+			if err := requester.RetrieveKeyPairForRun(&reqRun); err != nil {
+				logger.Warn("could not retrieve keypair for run", "error", err)
+				reqRun.KeyPairResponseFailed = true
+			}
 			requester.WriteRunToFile(&reqRun, "ok", logger)
 		}
 
@@ -164,6 +169,10 @@ func (requester *Requester) RunSingle(workerId int64, runId int64) *RequesterRun
 	// when we get here the verification method was not there.
 	// so try to gather the keypair and write all of it to a log file
 
+	if err := requester.RetrieveKeyPairForRun(&reqRun); err != nil {
+		logger.Warn("could not retrieve keypair for run", "error", err)
+		reqRun.KeyPairResponseFailed = true
+	}
 	requester.WriteRunToFile(&reqRun, "failed", logger)
 
 	return &reqRun
@@ -201,7 +210,12 @@ func (requester *Requester) SendRequest(run *RequesterRun) error {
 		return fmt.Errorf("failed to parse body for did %v: %w", run.Did, err)
 	}
 
-	run.ParticipantRequestResponse = string(responseBody)
+	var responseJson any
+	if err := json.Unmarshal(responseBody, &responseJson); err != nil {
+		return fmt.Errorf("failed to parse body to json for did %v: %w", run.Did, err)
+	}
+
+	run.ParticipantRequestResponse = responseJson
 	return nil
 }
 
@@ -236,15 +250,19 @@ func (requester *Requester) RetrieveDidDocument(run *RequesterRun) error {
 		return fmt.Errorf("body response read error %v", err)
 	}
 
-	run.DidDocumentResponse = string(responseBody)
+	var responseJson any
+	if err := json.Unmarshal(responseBody, &responseJson); err != nil {
+		return fmt.Errorf("failed to parse did document body to json for did %v: %w", run.Did, err)
+	}
+
+	run.DidDocumentResponse = responseJson
 	return nil
 }
 
 func (requester *Requester) CheckDidVerificationMethods(run *RequesterRun) error {
-	var didDocument map[string]any
-	err := json.Unmarshal([]byte(run.DidDocumentResponse), &didDocument)
-	if err != nil {
-		return fmt.Errorf("failed to unmarshal did document: %v", err)
+	didDocument, ok := run.DidDocumentResponse.(map[string]any)
+	if !ok {
+		return fmt.Errorf("assertion failed: didDocumentResponse is not map[string]any")
 	}
 
 	verificationMethods, hasVerMethods := didDocument["verificationMethod"]
@@ -266,6 +284,45 @@ func (requester *Requester) CheckDidVerificationMethods(run *RequesterRun) error
 	return nil
 }
 
+func (requester *Requester) RetrieveKeyPairForRun(run *RequesterRun) error {
+	encodedDid := base64.URLEncoding.EncodeToString([]byte(run.Did))
+
+	req, err := http.NewRequest(
+		http.MethodGet,
+		targetIdHubUrl+"/v1alpha/participants/"+encodedDid+"/keypairs",
+		nil,
+	)
+
+	req.Header.Add("X-Api-Key", targetIdHubApiKey)
+
+	if err != nil {
+		return fmt.Errorf("failed to create request for keypair for did %v: %w", run.Did, err)
+	}
+
+	res, err := requester.Client.Do(req)
+	if err != nil {
+		return fmt.Errorf("requesting keypair failed for did %v: %w", run.Did, err)
+	}
+	defer res.Body.Close()
+
+	if res.StatusCode != http.StatusOK {
+		return fmt.Errorf("received non-ok status %v", res.StatusCode)
+	}
+
+	responseBody, err := io.ReadAll(res.Body)
+	if err != nil {
+		return fmt.Errorf("failed to parse body for did %v: %w", run.Did, err)
+	}
+
+	var responseJson any
+	if err := json.Unmarshal(responseBody, &responseJson); err != nil {
+		return fmt.Errorf("failed to parse key pair body to json for did %v: %w", run.Did, err)
+	}
+
+	run.KeyPairResponse = responseJson
+	return nil
+}
+
 func (requester *Requester) WriteRunToFile(run *RequesterRun, suffix string, logger *slog.Logger) {
 	if len(suffix) == 0 {
 		logger.Warn("empty suffix not allowed for logs")
@@ -279,7 +336,7 @@ func (requester *Requester) WriteRunToFile(run *RequesterRun, suffix string, log
 		return
 	}
 
-	fileContent, err := json.Marshal(run)
+	fileContent, err := json.MarshalIndent(run, "", "  ")
 	if err != nil {
 		logger.Warn("failed to marshal json of req run", "error", err)
 		return
