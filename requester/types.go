@@ -1,10 +1,10 @@
 package requester
 
 type ParticipantRequest struct {
-	Active        bool   `json:"active"`
-	ParticipantID string `json:"participantId"`
-	DID           string `json:"did"`
-	Key           Key    `json:"key"`
+	Active               bool   `json:"active"`
+	ParticipantContextId string `json:"participantContextId"`
+	DID                  string `json:"did"`
+	Key                  Key    `json:"key"`
 }
 
 type Key struct {
@@ -20,9 +20,9 @@ type KeyGeneratorParams struct {
 
 func NewParticipantRequest(did string) ParticipantRequest {
 	req := ParticipantRequest{
-		Active:        true,
-		ParticipantID: did,
-		DID:           did,
+		Active:               true,
+		ParticipantContextId: did,
+		DID:                  did,
 		Key: Key{
 			KeyID:           did + "#test-key",
 			PrivateKeyAlias: did + "-test-key-alias",
