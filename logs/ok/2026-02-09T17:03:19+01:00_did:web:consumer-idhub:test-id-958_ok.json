@@ -1,0 +1,61 @@
+{
+  "Did": "did:web:consumer-idhub:test-id-958",
+  "ParticipantRequest": {
+    "active": true,
+    "participantId": "did:web:consumer-idhub:test-id-958",
+    "did": "did:web:consumer-idhub:test-id-958",
+    "key": {
+      "keyId": "did:web:consumer-idhub:test-id-958#test-key",
+      "privateKeyAlias": "did:web:consumer-idhub:test-id-958-test-key-alias",
+      "keyGeneratorParams": {
+        "algorithm": "EdDSA",
+        "curve": "Ed25519"
+      }
+    }
+  },
+  "ParticipantRequestResponse": {
+    "apiKey": "ZGlkOndlYjpjb25zdW1lci1pZGh1Yjp0ZXN0LWlkLTk1OA==.YmSt/j9uSdBUOUzGS2SCWpTU16jAeK4B/ZzvoTcOZy3jfawFJn4Fe/nbFo2gPCDcSqA2iMqW25FsEShnChtwSA==",
+    "clientId": "did:web:consumer-idhub:test-id-958",
+    "clientSecret": "AUUG1vqIIHOHIC6O"
+  },
+  "ParticipantRequestFailed": false,
+  "DidDocumentResponse": {
+    "@context": [
+      "https://www.w3.org/ns/did/v1"
+    ],
+    "authentication": [],
+    "id": "did:web:consumer-idhub:test-id-958",
+    "service": [],
+    "verificationMethod": [
+      {
+        "controller": "did:web:consumer-idhub:test-id-958",
+        "id": "did:web:consumer-idhub:test-id-958#test-key",
+        "publicKeyJwk": {
+          "crv": "Ed25519",
+          "kty": "OKP",
+          "x": "3_VI4ZfmXWmUbt5hQc6XB3ABM73OhC_v5pt8W1mUw9Q"
+        },
+        "publicKeyMultibase": null,
+        "type": "JsonWebKey2020"
+      }
+    ]
+  },
+  "DidDocumentFailed": false,
+  "KeyPairResponse": [
+    {
+      "defaultPair": true,
+      "groupName": null,
+      "id": "79158441-2404-46d2-be7d-dc186505d704",
+      "keyContext": "JsonWebKey2020",
+      "keyId": "did:web:consumer-idhub:test-id-958#test-key",
+      "participantContextId": "did:web:consumer-idhub:test-id-958",
+      "privateKeyAlias": "did:web:consumer-idhub:test-id-958-test-key-alias",
+      "rotationDuration": 0,
+      "serializedPublicKey": "{\"kty\":\"OKP\",\"crv\":\"Ed25519\",\"kid\":\"did:web:consumer-idhub:test-id-958#test-key\",\"x\":\"3_VI4ZfmXWmUbt5hQc6XB3ABM73OhC_v5pt8W1mUw9Q\"}",
+      "state": 200,
+      "timestamp": 1770652999192,
+      "useDuration": 15552000000
+    }
+  ],
+  "KeyPairResponseFailed": false
+}

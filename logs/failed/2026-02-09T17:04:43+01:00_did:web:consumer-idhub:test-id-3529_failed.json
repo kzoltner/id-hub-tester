@@ -1,0 +1,49 @@
+{
+  "Did": "did:web:consumer-idhub:test-id-3529",
+  "ParticipantRequest": {
+    "active": true,
+    "participantId": "did:web:consumer-idhub:test-id-3529",
+    "did": "did:web:consumer-idhub:test-id-3529",
+    "key": {
+      "keyId": "did:web:consumer-idhub:test-id-3529#test-key",
+      "privateKeyAlias": "did:web:consumer-idhub:test-id-3529-test-key-alias",
+      "keyGeneratorParams": {
+        "algorithm": "EdDSA",
+        "curve": "Ed25519"
+      }
+    }
+  },
+  "ParticipantRequestResponse": {
+    "apiKey": "ZGlkOndlYjpjb25zdW1lci1pZGh1Yjp0ZXN0LWlkLTM1Mjk=.9vCNiq6AB3/EiMJ1fhLQ0nvoqG4gYvvKRTk8K55Pf+XBbSCMRrRRqjE+4CZPUSI/kCoUuFHBDV7q0xbqk+WvNw==",
+    "clientId": "did:web:consumer-idhub:test-id-3529",
+    "clientSecret": "t4T0zbNP7mXtNdfX"
+  },
+  "ParticipantRequestFailed": false,
+  "DidDocumentResponse": {
+    "@context": [
+      "https://www.w3.org/ns/did/v1"
+    ],
+    "authentication": [],
+    "id": "did:web:consumer-idhub:test-id-3529",
+    "service": [],
+    "verificationMethod": []
+  },
+  "DidDocumentFailed": true,
+  "KeyPairResponse": [
+    {
+      "defaultPair": true,
+      "groupName": null,
+      "id": "d622c42b-2d44-49a6-9877-89f74376cbe2",
+      "keyContext": "JsonWebKey2020",
+      "keyId": "did:web:consumer-idhub:test-id-3529#test-key",
+      "participantContextId": "did:web:consumer-idhub:test-id-3529",
+      "privateKeyAlias": "did:web:consumer-idhub:test-id-3529-test-key-alias",
+      "rotationDuration": 0,
+      "serializedPublicKey": "{\"kty\":\"OKP\",\"crv\":\"Ed25519\",\"kid\":\"did:web:consumer-idhub:test-id-3529#test-key\",\"x\":\"KCMHWnPnrWQQqH18vb0chu2cl94muQRhmD4rnDTCxg\"}",
+      "state": 200,
+      "timestamp": 1770653083239,
+      "useDuration": 15552000000
+    }
+  ],
+  "KeyPairResponseFailed": false
+}

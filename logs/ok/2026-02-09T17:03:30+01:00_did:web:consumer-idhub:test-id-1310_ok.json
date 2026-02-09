@@ -1,0 +1,61 @@
+{
+  "Did": "did:web:consumer-idhub:test-id-1310",
+  "ParticipantRequest": {
+    "active": true,
+    "participantId": "did:web:consumer-idhub:test-id-1310",
+    "did": "did:web:consumer-idhub:test-id-1310",
+    "key": {
+      "keyId": "did:web:consumer-idhub:test-id-1310#test-key",
+      "privateKeyAlias": "did:web:consumer-idhub:test-id-1310-test-key-alias",
+      "keyGeneratorParams": {
+        "algorithm": "EdDSA",
+        "curve": "Ed25519"
+      }
+    }
+  },
+  "ParticipantRequestResponse": {
+    "apiKey": "ZGlkOndlYjpjb25zdW1lci1pZGh1Yjp0ZXN0LWlkLTEzMTA=.2nV4s+0P47l516oY6EzAwdxHJaCQKei1AnIQQOgyZmR+6Nv+g0AUuKKs+1PX3+MoE4XZxQvYg2ZylsTyMBzSHg==",
+    "clientId": "did:web:consumer-idhub:test-id-1310",
+    "clientSecret": "cf92FvTITeU4xyAU"
+  },
+  "ParticipantRequestFailed": false,
+  "DidDocumentResponse": {
+    "@context": [
+      "https://www.w3.org/ns/did/v1"
+    ],
+    "authentication": [],
+    "id": "did:web:consumer-idhub:test-id-1310",
+    "service": [],
+    "verificationMethod": [
+      {
+        "controller": "did:web:consumer-idhub:test-id-1310",
+        "id": "did:web:consumer-idhub:test-id-1310#test-key",
+        "publicKeyJwk": {
+          "crv": "Ed25519",
+          "kty": "OKP",
+          "x": "K30ODXh5x59rD-act3foOquc9nN2f2adXbOvim3BibY"
+        },
+        "publicKeyMultibase": null,
+        "type": "JsonWebKey2020"
+      }
+    ]
+  },
+  "DidDocumentFailed": false,
+  "KeyPairResponse": [
+    {
+      "defaultPair": true,
+      "groupName": null,
+      "id": "68f602ee-78e1-4a30-bd66-e5012a625574",
+      "keyContext": "JsonWebKey2020",
+      "keyId": "did:web:consumer-idhub:test-id-1310#test-key",
+      "participantContextId": "did:web:consumer-idhub:test-id-1310",
+      "privateKeyAlias": "did:web:consumer-idhub:test-id-1310-test-key-alias",
+      "rotationDuration": 0,
+      "serializedPublicKey": "{\"kty\":\"OKP\",\"crv\":\"Ed25519\",\"kid\":\"did:web:consumer-idhub:test-id-1310#test-key\",\"x\":\"K30ODXh5x59rD-act3foOquc9nN2f2adXbOvim3BibY\"}",
+      "state": 200,
+      "timestamp": 1770653010663,
+      "useDuration": 15552000000
+    }
+  ],
+  "KeyPairResponseFailed": false
+}

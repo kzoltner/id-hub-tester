@@ -1,0 +1,61 @@
+{
+  "Did": "did:web:consumer-idhub:test-id-1803",
+  "ParticipantRequest": {
+    "active": true,
+    "participantId": "did:web:consumer-idhub:test-id-1803",
+    "did": "did:web:consumer-idhub:test-id-1803",
+    "key": {
+      "keyId": "did:web:consumer-idhub:test-id-1803#test-key",
+      "privateKeyAlias": "did:web:consumer-idhub:test-id-1803-test-key-alias",
+      "keyGeneratorParams": {
+        "algorithm": "EdDSA",
+        "curve": "Ed25519"
+      }
+    }
+  },
+  "ParticipantRequestResponse": {
+    "apiKey": "ZGlkOndlYjpjb25zdW1lci1pZGh1Yjp0ZXN0LWlkLTE4MDM=.RHvALRPj6eX5yrPD0fZoURZk9CCO/JAkGU5GgVju/K1s2456HsJq+dCuhU2NlkvWmcjEIgNpriTX+ZtUjxwFyw==",
+    "clientId": "did:web:consumer-idhub:test-id-1803",
+    "clientSecret": "3MfPAMNxz0DoVar1"
+  },
+  "ParticipantRequestFailed": false,
+  "DidDocumentResponse": {
+    "@context": [
+      "https://www.w3.org/ns/did/v1"
+    ],
+    "authentication": [],
+    "id": "did:web:consumer-idhub:test-id-1803",
+    "service": [],
+    "verificationMethod": [
+      {
+        "controller": "did:web:consumer-idhub:test-id-1803",
+        "id": "did:web:consumer-idhub:test-id-1803#test-key",
+        "publicKeyJwk": {
+          "crv": "Ed25519",
+          "kty": "OKP",
+          "x": "DakqDS-yJaVuw_bWFf2Iu9MFrkEMCTFDXtE-P_BbgrM"
+        },
+        "publicKeyMultibase": null,
+        "type": "JsonWebKey2020"
+      }
+    ]
+  },
+  "DidDocumentFailed": false,
+  "KeyPairResponse": [
+    {
+      "defaultPair": true,
+      "groupName": null,
+      "id": "104395cd-8ccb-4285-bef5-db0f5cab3275",
+      "keyContext": "JsonWebKey2020",
+      "keyId": "did:web:consumer-idhub:test-id-1803#test-key",
+      "participantContextId": "did:web:consumer-idhub:test-id-1803",
+      "privateKeyAlias": "did:web:consumer-idhub:test-id-1803-test-key-alias",
+      "rotationDuration": 0,
+      "serializedPublicKey": "{\"kty\":\"OKP\",\"crv\":\"Ed25519\",\"kid\":\"did:web:consumer-idhub:test-id-1803#test-key\",\"x\":\"DakqDS-yJaVuw_bWFf2Iu9MFrkEMCTFDXtE-P_BbgrM\"}",
+      "state": 200,
+      "timestamp": 1770653026956,
+      "useDuration": 15552000000
+    }
+  ],
+  "KeyPairResponseFailed": false
+}
