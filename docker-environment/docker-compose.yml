@@ -1,0 +1,105 @@
+services:
+  shared-postgres:
+    container_name: issuer-postgres
+    image: postgres:16.4-alpine
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=password
+    volumes:
+      - ./additional_config/pg_init:/docker-entrypoint-initdb.d
+    healthcheck:
+      test:
+        ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -h 127.0.0.1 || exit 1"]
+      interval: 3s
+      timeout: 3s
+      retries: 20
+    networks:
+      - id-hub-key-test-network
+
+  shared-vault:
+    container_name: shared-vault
+    image: vault:1.13.3
+    command: server -dev -dev-root-token-id=vaultsecret0123456789 -dev-listen-address=0.0.0.0:8200
+    environment:
+      VAULT_ADDR: http://0.0.0.0:8200
+      SKIP_SETCAP: true
+      SKIP_CHOWN: true
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "sh",
+          "-c",
+          "VAULT_ADDR=http://127.0.0.1:8200 vault status >/dev/null 2>&1",
+        ]
+      interval: 4s
+      timeout: 3s
+      retries: 20
+    ports:
+      - "8200:8200"
+    networks:
+      - id-hub-key-test-network
+
+  vault-init:
+    container_name: vault-init
+    image: alpine:3.19
+    depends_on:
+      shared-vault:
+        condition: service_healthy
+    environment:
+      VAULT_ADDR: http://shared-vault:8200
+      VAULT_TOKEN: vaultsecret0123456789
+    volumes:
+      - ./additional_config/vault-init.sh:/scripts/init.sh:ro
+    entrypoint:
+      [
+        "sh",
+        "-c",
+        "apk add --no-check-certificate --no-cache curl jq openssl && sh /scripts/init.sh",
+      ]
+    restart: "no"
+    networks:
+      - id-hub-key-test-network
+
+  consumer-idhub:
+    container_name: consumer-idhub
+    # image: ghcr.io/factory-x-contributions/fx-id-hub-charts/identityhub:0.0.2 # Note: image pull requires docker login
+    # image: identityhub-dev:latest # Note: Updated for key bug
+    image: identityhub:0.1.0-SNAPSHOT # Note: Updated for key bug
+    depends_on:
+      shared-postgres:
+        condition: service_healthy
+      shared-vault:
+        condition: service_healthy
+    ports:
+      - "1045:1045" # debugger
+      - "20000:80" # did API           -> /
+      - "20100:15151" # identity API      -> /api/identity
+      - "20500:9292" # sts API           -> /api/sts
+      - "20600:13131" # credentials API   -> /api/credentials
+    #      - "8181:8181"        # default API       -> /api
+    #      - "9999:9999"        # statuslist API    -> /statuslist
+    environment:
+      - JAVA_TOOL_OPTIONS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:1045
+      - edc.hostname=consumer-idhub
+      - edc.ih.issuer.demonstrator.scope=org.eclipse.tractusx.vc.type
+      - edc.iam.did.web.use.https=false
+      - edc.ih.api.superuser.id=admin
+      - edc.ih.api.superuser.key=YWRtaW4.adminKey
+      - web.http.did.port=80
+      - edc.sql.schema.autocreate=true
+      - edc.datasource.default.url=jdbc:postgresql://shared-postgres:5432/cons_ih_db
+      - edc.datasource.default.user=admin
+      - edc.datasource.default.password=password
+      - edc.vault.hashicorp.url=http://shared-vault:8200
+      - edc.vault.hashicorp.health.check.enabled=true
+      - edc.vault.hashicorp.token=vaultsecret0123456789
+    volumes:
+      - ./additional_config/logging.properties:/app/logging.properties
+    networks:
+      - id-hub-key-test-network
+
+networks:
+  id-hub-key-test-network:
+    name: id-hub-key-test-network
+    driver: bridge

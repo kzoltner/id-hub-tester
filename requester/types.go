@@ -1,8 +1,9 @@
 package requester
 
 type ParticipantRequest struct {
-	Active               bool   `json:"active"`
-	ParticipantContextId string `json:"participantContextId"`
+	Active bool `json:"active"`
+	// ParticipantContextId string `json:"participantContextId"` // 0.15.1
+	ParticipantContextId string `json:"participantId"` // 0.14
 	DID                  string `json:"did"`
 	Key                  Key    `json:"key"`
 }
