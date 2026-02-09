@@ -19,7 +19,7 @@ The produced jsons in failed contain:
 - ParticipantRequest: The actual data that was sent (not encoded as it is from the struct directly)
 - ParticipantRequestResponse: What the server responded with
 - DidDocumentResponse: Just the did document of this run
-- KeyPairResponse: left empty, but the [IdentityHub API](https://eclipse-edc.github.io/IdentityHub/openapi/identity-api/#/) has a KeyPair endpoint to get all of them - just remember to put ?limit=10000 to get all.
+- KeyPairResponse: contains whatever the keypairs endpoint for the participant returns
 
 # Results
 So far, I was able to reproduce the error about 20 times (give or take 10) for every 5000 runs.
